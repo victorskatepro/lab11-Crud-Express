@@ -1,0 +1,31 @@
+extends layout
+
+extends layout
+
+block content
+    .main.container
+        .row
+            .col-md-6.col-md-offset-3
+                h1.display-4.m-b-2 Noticia
+                form(method='POST' action='/new-notice')
+                    a.btn.btn-primary(type='submit' href="/comment_createView?_id="+data._id) comentario nuevo
+                    a.btn.btn-warning(href="/notice", style="margin:5px") Volver
+                    div.form-group
+                        label(for='titulo') Titulo:
+                        input#titulo.form-control(type='text' name='titulo' disabled value=data.titulo)
+                    div.form-group
+                        label(for='descripcion') Descripcion:
+                        input#descripcion.form-control(type='text' name='descripcion' disabled value=data.descripcion)
+                    div.form-group
+                        label(for='categoria') Categoria:
+                        input#categoria.form-control(type='text' name='categoria' disabled value=data.categoria)
+    .main.container
+        .row
+            .col-md-6.col-md-offset-3
+                - console.log(data)
+                for item in data.comentarios
+                    .panel.panel-primary
+                        .panel-heading(value=item.autor)
+                            h2= "Autor :"+item.autor
+                        .panel-body= "Mensaje: "+item.mensaje
+                            h5="Fecha: "+item.fecha

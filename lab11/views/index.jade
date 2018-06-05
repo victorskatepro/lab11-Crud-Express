@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .container(style="padding:5px;")
+         a(type="btn btn-primary active" href="/new-notice" content="Crear")    Crear
+          span(class="glyphicon glyphicon-plus")
+    div(class="container aDetallado")
+        table(id="test-table" class="table table-striped table-dark")
+          thead(id = "test-head" class="thead-dark")
+          tr
+            th Id
+            th Titulo
+            th Descripcion
+            th Categoria
+            th Fecha
+            th Comentarios
+            th Editar
+            th Comentar
+            th Borrar
+            tbody
+              for item in data
+                tr
+                  td=item._id
+                  td=item.titulo
+                  td=item.descripcion
+                  td=item.categoria
+                  td=item.fecha
+                  td
+                    form(method="post" action="/notice/detail?_id="+item._id)
+                      button.btn.btn-info(type="submit" )
+                        span(class="glyphicon glyphicon-eye-open" )
+                  td
+                    form(method="post" action="/notice/update?_id="+item._id)
+                      button.btn.btn-info(type="submit")
+                        span(class="glyphicon glyphicon-wrench")
+                  td
+                    a.btn.btn-info(href="/comment_createView?_id="+item._id)
+                      span(class="glyphicon glyphicon-pencil")
+                  td
+                    form(method="post" action="/notice/delete?_id="+item._id)
+                      button.btn.btn-danger(type="submit" )
+                        span(class="glyphicon glyphicon-remove")
+
+
